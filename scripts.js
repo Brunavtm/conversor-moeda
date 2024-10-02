@@ -17,7 +17,7 @@ amount.addEventListener("input", () => {
     const hasCharactersRegex = /\D+/g
     amount.value = amount.value.replace(hasCharactersRegex, "")
 })
-
+//evento submit
 form.onsubmit = (event) => {
     event.preventDefault()
 
@@ -41,10 +41,19 @@ function convertCurrency(amount, price, symbol) {
     try{
         description.textContent = `${symbol} 1 = ${formatCurrencyBRL(price)}`
         
+        //calcula o total
         let total = amount * price
+
+        //testa se é número
+        if(isNaN(total)){
+            return alert("Por favor digite o valor a ser convertido.")
+        }
+
+        //formata o valor
         total = formatCurrencyBRL(total)
         result.textContent = `${total}`
 
+        //mostra o footer
         footer.classList.add("show-result")
     }
     catch(error){
@@ -53,7 +62,7 @@ function convertCurrency(amount, price, symbol) {
         alert("Não foi possível converter. Tente novamente mais tarde.")
     }
 }
-
+//formata valor para reais
 function formatCurrencyBRL(value){
     return Number(value).toLocaleString("pt-BR", {
         style: "currency",
