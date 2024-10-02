@@ -10,6 +10,7 @@ const amount = document.getElementById("amount")
 const currency = document.getElementById("currency")
 const footer = document.querySelector("main footer")
 const description = document.getElementById("description")
+const result = document.getElementById("result")
 
 // Manipulando input para receber apenas números usando regex
 amount.addEventListener("input", () => {
@@ -39,7 +40,10 @@ form.onsubmit = (event) => {
 function convertCurrency(amount, price, symbol) {
     try{
         description.textContent = `${symbol} 1 = ${formatCurrencyBRL(price)}`
-
+        
+        let total = amount * price
+        total = formatCurrencyBRL(total)
+        result.textContent = `${total}`
 
         footer.classList.add("show-result")
     }
